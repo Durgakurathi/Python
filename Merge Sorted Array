@@ -1,0 +1,24 @@
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        j=0
+        nums1.sort()
+        for i in range(len(nums1)):
+            if len(nums1)!=m:
+                if nums1[j]==0:
+                    nums1.pop(j)
+                else:
+                    j+=1
+        nums1.sort()
+        j=0
+        for i in range(len(nums2)):
+            if len(nums2)!=n:
+                if nums2[j]==0:
+                    nums2.pop(j)
+                else:
+                    j+=1
+        nums1+=nums2
+        nums1.sort()
+        return nums1
