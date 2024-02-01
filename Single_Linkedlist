@@ -1,0 +1,279 @@
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+        
+class llist:
+    def __init__(self):
+        self.head=None  
+    def printList(self):
+        x=self.count()
+        if x>0:
+            temp=self.head
+            print("The list is:",end=" ")
+            while(temp.next!=None):
+                print(temp.data,end=" ")
+                temp=temp.next
+            print(temp.data)
+        else:
+            print("List is Empty")
+        
+    def insertAtfirst(self):
+        data=int(input(" Enter Element in to the list"))
+        s=Node(data)
+        s.next=self.head
+        self.head=s
+        print("Insert at the first end element is",s.data)
+        
+    def count(self):
+         temp=self.head
+         c=0
+         while(temp!=None):
+            c+=1
+            temp=temp.next
+         return c
+
+    def insertAtlast(self):
+        x=self.count()
+        if x>0:
+            data=int(input(" Enter Element in to the list"))
+            temp=self.head
+            s=Node(data)
+            while(temp.next!=None):
+                temp=temp.next
+            temp.next=s
+        else:
+            self.insertAtfirst()
+        
+    def insertAtPosition(self):
+        x=self.count()
+        if x>0:
+            data=int(input(" Enter Element in to the list"))
+            pos=int(input("Enter position to be inserted"))
+            if pos<=x:
+                temp=self.head
+                s=Node(data)
+                if pos<=0:
+                    return
+                if pos==1:
+                    s.next=temp
+                    temp.next=s
+                while(pos-2!=0):
+                    temp=temp.next
+                    pos-=1
+                s.next=temp.next
+                temp.next=s
+            else:
+                print("Please Enter the the correct position value")
+        else:
+            print("The list is empty so the value to be inserted at the first position")
+            self.insertAtfirst()
+        
+    #Retrive element at first position
+    def dataRetAt1(self):
+        x=self.count()
+        if x>0:
+            print(list.head.data)
+        else:
+            print("list is empty")
+        
+    #retrive element at specific position
+    def dataRetAtpos(self):
+        x=self.count()
+        if x>0:
+            pos=int(input("Enter position to be Retrived"))
+            if pos<=x:
+                temp=self.head
+                if pos<=0:
+                    return
+                if pos==1:
+                    print(self.head.data)
+                    return
+                while(pos-1!=0):
+                    temp=temp.next
+                    pos-=1
+                print(temp.data)
+            else:
+                print("please enter correct position value")
+        else:
+            print("list is empty")
+        
+    #swap without converting the list
+    def swap(self):
+        p1=int(input("Enter first element to be swap"))
+        p2=int(input("Enter next element to be swap"))
+        temp=self.head
+        temp1=self.head.next
+        while(temp.data!=p1):
+            temp=temp.next
+        while(temp1.data!=p2):
+            temp1=temp1.next
+        temp.data=p2
+        temp1.data=p1
+        
+    def sort(self):
+        s=0
+        temp=self.head
+        while(temp.next!=None):
+            temp1=temp.next
+            while(temp1!=None):
+                if(temp.data>temp1.data):
+                    s=temp.data
+                    temp.data=temp1.data
+                    temp1.data=s
+                temp1=temp1.next
+            temp=temp.next
+            
+    def duplicate(self):
+        self.sort()
+        temp=self.head
+        while(temp.next!=None):
+            temp1=temp.next
+            if(temp.data==temp1.data):
+                temp.next=temp1.next
+                temp1=temp1.next
+            temp=temp.next
+            
+    def rotate(self):
+        c=1
+        v=int(input("Enter number of times to rotate"))
+        s=self.head
+        temp=self.head
+        temp1=self.head
+        while(temp.next!=None):
+            temp=temp.next
+        while(temp1!=None):
+            if c!=v:
+                temp1=temp1.next
+                c+=1
+            else:
+                break
+        self.head=temp1.next
+        temp1.next=None
+        temp.next=s
+        
+    def reverse(self):
+        temp=self.head
+        p=None
+        while(temp!=None):
+            n=temp.next
+            temp.next=p
+            p=temp
+            temp=n
+        self.head=p
+    def deleteAtfirst(self):
+        x=self.count()
+        if x>0:
+            self.head=self.head.next
+        else:
+            print("list is empty")
+    def deleteAtlast(self):
+        x=self.count()
+        if x>1:
+            temp=self.head
+            p=None
+            while(temp.next!=None):
+                p=temp
+                temp=temp.next
+            p.next=None
+        elif x==1:
+            self.head=None
+        else:
+            print("list is empty")
+    def deleteAtpos(self):
+        x=self.count()
+        c=1
+        temp=self.head
+        if x>1:
+            p=self.head
+            pos=int(input("Enter Position of the deleted value"))
+            if pos<=x:
+                if c==pos:
+                    self.head=temp.next
+                else:
+                    while c!=pos-1:
+                        temp=temp.next
+                        c+=1
+                    temp.next=temp.next.next
+            else:
+                print("Please Enter Correct Position Value")
+        elif x==1:
+                self.head=None
+        else:
+            print("list is empty")
+                    
+                
+        
+
+        
+                
+         
+list=llist()
+
+while(1):
+    print("Enter Options for below")
+    option=int(input('''1-Insert At first
+                     2-Insert At Last
+                     3-Insert At Position
+                     4-Count
+                     5-Retrive element at first position
+                     6-retrive element at specific position
+                     7-Swap
+                     8-Sort
+                     9-Remove Duplicates
+                     10-Rotate
+                     11-Reverse
+                     12-Delete Element At First Position
+                     13-Delete Element At Last
+                     14-Delete Element At Position
+                     15- Print List
+                     '''))
+    if option==1:
+        print("Insert At first")
+        list.insertAtfirst()
+    elif option==2:
+        print("Insert At Last")
+        list.insertAtlast()
+    elif option==3:
+        print("Insert At Position")
+        list.insertAtPosition()
+    elif option==4:
+        print("Count")
+        print(list.count())
+    elif option==5:
+        print("Retrive element at first position")
+        list.dataRetAt1()
+    elif option==6:
+        print("Retrive element at Specific position")
+        list.dataRetAtpos()
+    elif option==7:
+        print("Swap")
+        list.swap()
+    elif option==8:
+        print("Sort")
+        list.sort()
+    elif option==9:
+        print("Remove Duplicates")
+        list.duplicate()
+    elif option==10:
+        print("Rotate")
+        list.rotate()
+    elif option==11:
+        print("Reverse")
+        list.reverse()
+    elif option==12:
+        print("Delete Element At First")
+        list.deleteAtfirst()
+    elif option==13:
+        print("Delete Element At Last")
+        list.deleteAtlast()
+    elif option==14:
+        print("Delete Element At Position")
+        list.deleteAtpos()
+    elif option==15:
+        print("Print List")
+        list.printList()
+    
+    else:
+        break
+
